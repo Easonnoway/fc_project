@@ -147,6 +147,15 @@ const getCarbpnemissions = async (is_store: number) => {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
         }
+        // console.log(urlList.length)
+        if(urlList.length != 2){
+            ElMessage({
+                showClose: true,
+                message: '证明文件不足',
+                type: 'warning',
+            })
+            return
+        }
         await setInformation({
             linked_id: oneid,
             annual_ce_quota: parseFloat(quota.value),
@@ -178,11 +187,11 @@ const getCarbpnemissions = async (is_store: number) => {
                             if (op.optionValue !== '') {
                                 switch (index) {
                                     case 1:
-                                        ele.defalutdiwei! = parseFloat(op.optionValue); break
+                                        ele.defalutdiwei! = parseFloat(op.optionValue!); break
                                     case 2:
-                                        ele.defaluthantan! = parseFloat(op.optionValue); break
+                                        ele.defaluthantan! = parseFloat(op.optionValue!); break
                                     case 3:
-                                        ele.defaultyanghua! = parseFloat(op.optionValue); break
+                                        ele.defaultyanghua! = parseFloat(op.optionValue!); break
                                 }
                             }
                         })
@@ -192,7 +201,7 @@ const getCarbpnemissions = async (is_store: number) => {
                                 is_store: is_store,
                                 enterprise_id: enid,
                                 kind: ele.checkedlabel,
-                                net_consumption: parseFloat(ele.option[0].optionValue),
+                                net_consumption: parseFloat(ele.option[0].optionValue!),
                                 average_low_calorific_value: ele.defalutdiwei!,
                                 carbon_content_per_unit_calorific_value: ele.defaluthantan!,
                                 carbon_oxidation_rate: ele.defaultyanghua!,
@@ -222,17 +231,17 @@ const getCarbpnemissions = async (is_store: number) => {
             if (allkey.indexOf(item) == 1 && item.checkedoptions[0].option[0].optionValue !== '' && item.checkedoptions[1].option[0].optionValue !== '') {
                 item.CO2value = 0
                 item.checkedoptions.forEach(async element => {
-                    console.log(element)
+                    // console.log(element)
                     await setBiomassBlendedFuel({
                         linked_id: oneid,
                         is_store: is_store,
                         enterprise_id: enid,
                         kind: element.checkedlabel,
-                        biomass_content: parseFloat(element.option[2].optionValue),
-                        net_consumption: parseFloat(element.option[0].optionValue),
-                        average_low_calorific_value: parseFloat(element.option[1].optionValue),
-                        carbon_content_per_unit_calorific_value: parseFloat(element.option[3].optionValue),
-                        carbon_oxidation_rate: parseFloat(element.option[4].optionValue)
+                        biomass_content: parseFloat(element.option[2].optionValue!),
+                        net_consumption: parseFloat(element.option[0].optionValue!),
+                        average_low_calorific_value: parseFloat(element.option[1].optionValue!),
+                        carbon_content_per_unit_calorific_value: parseFloat(element.option[3].optionValue!),
+                        carbon_oxidation_rate: parseFloat(element.option[4].optionValue!)
                     }).then(response => {
                         // 处理请求成功的响应
                         let message = "计算完毕"
@@ -1084,7 +1093,7 @@ const allkey = reactive([
                     },
                     {
                         optionTitle: '低位发热量（GJ/t，GJ/Nm³）',
-                        optionValue: '',
+                        // optionValue: '',
                     },
                     {
                         optionTitle: '单位热值含碳量（tc/GJ）',

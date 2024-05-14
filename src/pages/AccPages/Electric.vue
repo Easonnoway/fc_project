@@ -4,8 +4,8 @@
         <el-card style="margin-bottom: 40px;">
             <div class="title">{{ key.title }}</div>
             <el-button style="margin-bottom: 20px;" @click="key.dialogVisible = true" v-show="key.show1">{{
-        key.checkedtitle
-    }}</el-button>
+                key.checkedtitle
+                }}</el-button>
             <el-radio-group v-model="key.selectvalue" v-show="key.show2">
                 <el-radio v-for="a in key.select" :label="a.checkedvalue">{{ a.checkedlabel }}</el-radio>
             </el-radio-group>
@@ -141,6 +141,14 @@ const getCarbpnemissions = async (is_store: number) => {
     if (is_store == 1) {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
+        }
+        if (urlList.length != 2) {
+            ElMessage({
+                showClose: true,
+                message: '证明文件不足',
+                type: 'warning',
+            })
+            return
         }
         await setInformation({
             linked_id: oneid,
