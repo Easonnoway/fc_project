@@ -1,0 +1,34 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      { "internalType": "address", "name": "recordAddress", "type": "address" },
+      { "internalType": "string", "name": "record_json", "type": "string" }
+    ],
+    "name": "addCarbonReport",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      { "internalType": "address", "name": "recordAddress", "type": "address" }
+    ],
+    "name": "getCarbonReport",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "records",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

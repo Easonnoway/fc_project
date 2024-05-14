@@ -1,0 +1,153 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "TransactionTrace",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "accountTransactions",
+    "outputs": [
+      { "internalType": "address", "name": "buyer", "type": "address" },
+      { "internalType": "address", "name": "seller", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "price", "type": "uint256" }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      { "internalType": "address", "name": "_buyer", "type": "address" },
+      { "internalType": "address", "name": "_seller", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "_price", "type": "uint256" }
+    ],
+    "name": "buyCarbonCredits",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      { "internalType": "address", "name": "_buyer", "type": "address" },
+      { "internalType": "address", "name": "_seller", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "_price", "type": "uint256" }
+    ],
+    "name": "createTransaction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_enterprise_type",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_carbonAccount",
+        "type": "address"
+      },
+      { "internalType": "int256", "name": "_carbonCredit", "type": "int256" },
+      { "internalType": "uint256", "name": "_stableCoin", "type": "uint256" }
+    ],
+    "name": "createUser",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      { "internalType": "address", "name": "_account", "type": "address" }
+    ],
+    "name": "getTransactionsByAccount",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "buyer", "type": "address" },
+          { "internalType": "address", "name": "seller", "type": "address" },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint256", "name": "price", "type": "uint256" }
+        ],
+        "internalType": "struct CarbonTrading.Transaction[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      { "internalType": "address", "name": "_carbonAccount", "type": "address" }
+    ],
+    "name": "getUser",
+    "outputs": [
+      { "internalType": "string", "name": "", "type": "string" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "int256", "name": "", "type": "int256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "users",
+    "outputs": [
+      { "internalType": "string", "name": "enterprise_type", "type": "string" },
+      { "internalType": "address", "name": "carbonAccount", "type": "address" },
+      { "internalType": "int256", "name": "carbonCredit", "type": "int256" },
+      { "internalType": "uint256", "name": "stableCoin", "type": "uint256" }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

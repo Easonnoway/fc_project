@@ -1,0 +1,19 @@
+{
+  "files": [
+    "src/apis/login.ts",
+    "src/apis/request.ts",
+    "src/apis/signup.ts",
+    "src/apis/trading.ts",
+    "src/utils/auth.ts",
+    "src/constract/web3utils.ts",
+    "src/utils/constract.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}

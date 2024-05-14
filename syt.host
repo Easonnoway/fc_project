@@ -1,0 +1,15 @@
+server {
+        listen       8080;#自己设置端口号
+        server_name  fc;#自己设置项目名称
+        #access_log  logs/host.access.log  main;
+        location / {
+            root   /home/dist;#这里写vue项目的所在地址
+            index  index.html;#这里是vue项目的首页，需要保证dist中有index.html文件
+        }
+
+        error_page   500 502 503 504  /50x.html;#错误页面
+    
+       
+    }
+
+
