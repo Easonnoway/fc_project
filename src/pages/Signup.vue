@@ -8,9 +8,9 @@
                 <signupCom/>
             </div>
             <div class="left">
-                <P>Signup</P>
-                <p>welcom to signup</p>
-                <el-link type="primary" @click="Signup">go login</el-link>
+                <P>注册</P>
+                <p>欢迎注册</p>
+                <el-link type="primary" @click="Signup">已有账号？前往登录</el-link>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
     }
     .left .el-link{
         position: relative;
-        left:139px;
+        left:110px;
         font-size: 15px;
         color: #409EFF;
         margin: 0 auto;

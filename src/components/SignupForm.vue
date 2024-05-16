@@ -7,20 +7,21 @@
     </div>
     <div class="Con">
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="140px" class="demo-ruleForm">
-            <el-form-item label="Account" prop="account">
+            <el-form-item label="用户名" prop="account">
                 <el-input v-model.number="ruleForm.username" />
             </el-form-item>
-            <el-form-item label="Password" prop="pass">
+            <el-form-item label="密码" prop="pass">
                 <el-input v-model="ruleForm.password" type="password" autocomplete="off" />
             </el-form-item>
-            <el-form-item label="Confirm" prop="checkPass">
+            <el-form-item label="确定密码" prop="checkPass">
                 <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" />
             </el-form-item>
             <el-form-item>
-                <el-button type="plain" @click="submitForm(ruleFormRef)">Submit</el-button>
+                <el-button type="plain" @click="isShow=true">确定</el-button>
             </el-form-item>
         </el-form>
     </div>
+    <Vcode :show="isShow" @success="success" @close="close" @fail="fail" :imgs="[Img]"></Vcode>
 </template>
 
 <script lang="ts" setup>
@@ -30,8 +31,29 @@ const radio = ref('公司')
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import router from '@/router';
-
+import Img from '@/assets/OIP.jpg'
+import Vcode from 'vue3-puzzle-vcode'
 const ruleFormRef = ref<FormInstance>()
+//验证码模态框是否出现，默认不展示
+const isShow = ref(false)
+//登录按钮
+const login = () => {
+  //展现验证码模态框
+  isShow.value = true
+}
+//用户通过了验证
+const success = (msg) => {
+  isShow.value = false
+  submitForm(ruleFormRef.value)
+}
+//用户点击遮罩层，关闭模态框
+const close = () => {
+  isShow.value = false
+}
+//用户验证失败
+const fail = () => {
+  console.log('验证失败')
+}
 
 const checkAccount = (rule: any, value: any, callback: any) => {
     if (!value) {

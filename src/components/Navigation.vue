@@ -14,7 +14,7 @@
     <el-button type="primary" round @click="leavelogin" class="leave" v-show="getloginState()">退出登录</el-button>
     <el-avatar :size="32" class="mr-3" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       v-show="getloginState()" />
-    <span class="username" v-show="getloginState()">welcome</span>
+    <span class="username" v-show="getloginState()">{{ getUsername() }}</span>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ import router from '@/router';
 
 import { ref } from 'vue'
 import { ElLoading, ElMessage } from "element-plus"
-import { getIdentity, removeIdentity, removeToken, removeUsername } from '@/utils/auth';
+import { getIdentity, removeIdentity, removeToken, removeUsername, getUsername } from '@/utils/auth';
 import { getloginState, removeTraloginState, removeloginState, setloginState } from '@/utils/loginstate';
 import { removeAddress, removeEnid } from '@/utils/constract';
 defineProps(['useLoginState'])
@@ -135,9 +135,10 @@ const leavelogin = () => {
 
 .username {
   position: absolute;
-  right: 1%;
+  right: 6%;
   font-size: 30px;
   top: 50%;
   margin-top: -15px;
+  padding-left: 0;
 }
 </style>

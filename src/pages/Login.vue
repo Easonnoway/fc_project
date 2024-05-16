@@ -5,9 +5,9 @@
     <div class="loginCon">
         <div class="login">
             <div class="left">
-                <P>Login</P>
-                <p>welcom to login</p>
-                <el-link type="primary" @click="Signup">go signup</el-link>
+                <P>登录</P>
+                <p>欢迎使用碳链宝</p>
+                <el-link type="primary" @click="Signup">没有账户？前往注册</el-link>
             </div>
             <div class="right">
                 <loginCom />
@@ -85,7 +85,7 @@ body {
 
 .left .el-link {
     position: relative;
-    left: 139px;
+    left: 110px;
     font-size: 15px;
     color: #409EFF;
     margin: 0 auto;
