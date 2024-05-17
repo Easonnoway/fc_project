@@ -76,18 +76,28 @@ const submitForm = (formEl: FormInstance | undefined) => {
         if (valid) {
             await cheackaddressTouser({address:ruleForm.address})
                 .then(res => {
-                    ElMessage({
+                    console.log(res!.data.data == 1)
+                    if(res!.data.data == 1){
+                        ElMessage({
                         showClose: true,
                         message: '地址与该账号匹配,登录成功',
                         type: 'success',
+                        })
+                        setTraloginState('true')
+                        setAddress(ruleForm.address)
+                        router.push('/trading/balance')
+                    }
+                    else{
+                        ElMessage({
+                        showClose: true,
+                        message: '地址与该账号不匹配',
+                        type: 'error',
                     })
-                    setTraloginState('true')
-                    setAddress(ruleForm.address)
-                    router.push('/trading/balance')
+                    }
                 }).catch(error => {
                     ElMessage({
                         showClose: true,
-                        message: '地址与该账号不匹配',
+                        message: '登录失败，请检查网络',
                         type: 'error',
                     })
                 })
