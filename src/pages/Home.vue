@@ -10,7 +10,7 @@
         <HomCon/>
       </el-main>
       <el-footer height="5%">
-        <p style="font-family: Helvetica;">Made by 服创小组</p>
+        <p style="font-family: Helvetica;">Made by 信安小组-以太链盟</p>
       </el-footer>
     </el-container>
 </template>
