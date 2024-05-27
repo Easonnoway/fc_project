@@ -1,8 +1,9 @@
 <template>
     <div class="radiodiv">
-        <el-radio-group v-model="radio">
+        <el-radio-group v-model="radio" >
             <el-radio-button label="公司" />
             <el-radio-button label="审核员" />
+            <el-radio-button label="管理员" />
         </el-radio-group>
     </div>
     <div class="Con">
@@ -31,8 +32,6 @@ const radio = ref('公司')
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import router from '@/router';
-import Img from '@/assets/OIP.jpg'
-import Vcode from 'vue3-puzzle-vcode'
 const ruleFormRef = ref<FormInstance>()
 //验证码模态框是否出现，默认不展示
 const isShow = ref(false)
@@ -42,7 +41,7 @@ const login = () => {
   isShow.value = true
 }
 //用户通过了验证
-const success = (msg:any) => {
+const success = (msg) => {
   isShow.value = false
   submitForm(ruleFormRef.value)
 }
@@ -117,7 +116,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
                         // 处理请求失败的错误
                         console.error(error);
                     });
-            } else {
+            } else if(radio.value == "审核员"){
                 let identity = 1
                 await signupApi({
                     username: ruleForm.username,
@@ -138,12 +137,35 @@ const submitForm = (formEl: FormInstance | undefined) => {
                         // console.log(error);
                     });
             }
-        } else {
+         else if(radio.value == "管理员"){
+                let identity = 2
+                await signupApi({
+                    username: ruleForm.username,
+                    password: ruleForm.password,
+                    identity: identity,
+                }).then(response => {
+                    // 处理请求成功的响应
+                    router.push('/login'),
+                    ElMessage({
+                        showClose: true,
+                        message: '注册成功',
+                        type: 'success',
+                    })
+                    // console.log(response);
+                })
+                    .catch(error => {
+                        // 处理请求失败的错误
+                        console.log(error);
+                    });
+            }else {
             console.log('error submit!')
             return false
         }
-    })
+    }
+})
+
 }
+
 
 const resetForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return

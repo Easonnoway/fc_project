@@ -19,14 +19,14 @@
                 <el-button @click="tradingJump" class="hsbutton" type="primary" size="mini" plain>企业碳交易</el-button>
             </div>
         </div>
-        <div class="jishu">
+        <!-- <div class="jishu">
             <p>核心技术展示</p>
             <el-carousel :interval="4000" type="card" height="40vh">
                 <el-carousel-item v-for="item in 6" :key="item">
                     <h3 text="2xl" justify="center">{{ item }}</h3>
                 </el-carousel-item>
             </el-carousel>
-        </div>
+        </div> -->
     </div>
 </template>
 

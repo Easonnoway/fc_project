@@ -26,7 +26,6 @@ export const $http = async (config: AxiosRequestConfig) => {
       ElMessage.error("网络错误");
     }
   } finally {
-    
   }
 };
 

@@ -1,11 +1,13 @@
 <template>
     <h1 style="text-align: center;color: #79BBFF;">发电企业</h1>
-    <div class="contentdiv" v-for="key in allkey">
+    <div class="contentdiv" v-for="(key , index) in allkey">
         <el-card style="margin-bottom: 40px;">
             <div class="title">{{ key.title }}</div>
             <el-button style="margin-bottom: 20px;" @click="key.dialogVisible = true" v-show="key.show1">{{
-                key.checkedtitle
-                }}</el-button>
+        key.checkedtitle
+    }}</el-button>
+     <!-- 查看默认值 -->
+        <know-default-button v-if="!index"></know-default-button>
             <el-radio-group v-model="key.selectvalue" v-show="key.show2">
                 <el-radio v-for="a in key.select" :label="a.checkedvalue">{{ a.checkedlabel }}</el-radio>
             </el-radio-group>
@@ -98,6 +100,7 @@ import { setFossilFuel, setDesulfurization, setElectricity, setInformation, uplo
 import historyJump from '@/hooks/useJumproute'
 import { ElMessage } from 'element-plus';
 import { nanoid } from 'nanoid'
+import KnowDefaultButton from '@/components/KnowDefaultButton.vue'
 let fileList: File[] = [];
 const enid = "Electric"
 const quota = ref("")
@@ -141,14 +144,6 @@ const getCarbpnemissions = async (is_store: number) => {
     if (is_store == 1) {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
-        }
-        if (urlList.length != 2) {
-            ElMessage({
-                showClose: true,
-                message: '证明文件不足',
-                type: 'warning',
-            })
-            return
         }
         await setInformation({
             linked_id: oneid,

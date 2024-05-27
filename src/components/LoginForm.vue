@@ -1,11 +1,7 @@
 <template>
-    <div class="radiodiv">
-        <el-radio-group v-model="radio">
-            <el-radio-button label="公司" />
-            <el-radio-button label="审核员" />
-        </el-radio-group>
-    </div>
+    
     <div class="Con">
+        <el-avatar :size="70" class="mr-3" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="140px"
             class="demo-ruleForm">
             <el-form-item label="账户" prop="account">
@@ -24,7 +20,6 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-let radio = ref('公司')
 import router from '@/router';
 import { loginApi } from "@/apis/login"
 import type { FormInstance, FormRules } from 'element-plus'
@@ -43,7 +38,7 @@ const login = () => {
   isShow.value = true
 }
 //用户通过了验证
-const success = (msg:any) => {
+const success = (msg) => {
   isShow.value = false
   submitForm(ruleFormRef.value)
 }
@@ -96,7 +91,13 @@ const submitForm = (formEl: FormInstance | undefined) => {
                             type: 'success',
                         })
                         setIdentity(response.data.data.identity.toString())
-                        router.push('/')
+                        if(response.data.data.identity==0||response.data.data.identity==1){
+                            router.push('/')
+                        }else{
+                            router.push('/manage')
+                            console.log(response.data.data)
+                        }
+                       
                         setloginState("true")
                         // console.log(getIdentity())
                     }
@@ -128,10 +129,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
      margin-bottom: 40px;
  }
 
- .radiodiv {
-     position: absolute;
-     left: 20%;
-     top: 15%;
-     margin: 0;
- }
+.el-avatar {
+    position: absolute;
+    left:55%;
+    top:-50%;
+}
 </style>

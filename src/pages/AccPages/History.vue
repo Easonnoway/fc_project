@@ -181,7 +181,7 @@ const uploadReporttoChain = async (index: number, row: Record) => {
     // console.log(typeof(jsonData))
     // console.log(metacoin.methods.getCarbonReportData().call())
     // console.log(row.enid, getAddress()!, row.carbonCoin, 100, privatKey_input.value)
-    // createUser(row.enid, getAddress()!, 100, 100, privatKey_input.value)
+    createUser(row.enid, getAddress()!, 100, 100, privatKey_input.value,row.enid)
 }
 
 const handleEdit = async (index: number, row: Record) => {

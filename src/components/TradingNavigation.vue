@@ -19,7 +19,7 @@
                     </el-icon>
                     <span>信息平台</span>
                 </template>
-                <el-menu-item index="2-1">政策法规</el-menu-item>
+                <el-menu-item index="2-1" @click="Jump6">政策法规</el-menu-item>
                 <el-menu-item index="2-2">出售信息</el-menu-item>
                 <el-menu-item index="2-3">需求信息</el-menu-item>
                 <el-menu-item index="2-4">成交记录</el-menu-item>
@@ -145,7 +145,25 @@ const Jump5 = () => {
     }
     router.push('/trading/trahistory')
 }
-
+const Jump6 = () => {
+    if (!getTraloginState()) {
+        ElMessage({
+            showClose: true,
+            message: '请先登录区块链钱包',
+            type: 'warning',
+        })
+        return
+    }
+    if (getEnid() == 'null') {
+        ElMessage({
+            showClose: true,
+            message: '你还未上传过碳报告',
+            type: 'warning',
+        })
+        return
+    }
+    router.push('/trading/law')
+}
 const jumpHome = () => {
     router.push('/')
 }

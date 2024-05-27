@@ -2,10 +2,10 @@
   <div>
     <p class="title">
     <div class="imgcon">
-      <img src="@/assets/Product_Logo.png" style="width: 100%;height: 100%;"
+      <img src="@/assets/Product_Logo.png" style="width: 100%;height: 100%;">
     </div>
     <p style="line-height: 10px;">碳核算交易平台</p>
-  </p>
+    </p>
   </div>
   <div>
     <el-button type="primary" size="mini" plain @click="accountingJump">碳核算</el-button>
@@ -135,7 +135,7 @@ const leavelogin = () => {
 
 .username {
   position: absolute;
-  right: 6%;
+  left: 91.5%;
   font-size: 30px;
   top: 50%;
   margin-top: -15px;

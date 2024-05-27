@@ -1,22 +1,29 @@
 <template>
     <h1 style="text-align: center;color: #79BBFF;">陶瓷企业</h1>
-    <div class="contentdiv" v-for="key in allkey">
+    <div class="contentdiv" v-for="(key , index) in allkey">
         <el-card style="margin-bottom: 40px;">
             <div class="title">{{ key.title }}</div>
             <el-button style="margin-bottom: 20px;" @click="key.dialogVisible = true" v-show="key.show1">{{
         key.checkedtitle
     }}</el-button>
+  <!-- 查看默认值 -->
+        <know-default-button v-if="!index"></know-default-button>
+           
+
+
             <el-radio-group v-model="key.selectvalue" v-show="key.show2">
                 <el-radio v-for="a in key.select" :label="a.checkedvalue">{{ a.checkedlabel }}</el-radio>
             </el-radio-group>
             <el-form-item v-if="key.show2" :label="key.optionTitle" style="margin-top: 20px;">
+                <!-- 净购入电力量 -->
                 <el-input v-model="key.optionValue" placeholder="请输入数字" clearable />
             </el-form-item>
             <el-form :inline="true" class="demo-form-inline">
                 <el-card v-for="a in key.checkedoptions" v-show="a.checkedvalue" style="margin-bottom: 20px;">
                     <div style="margin-bottom: 10px;font-weight: bolder;">{{ a.checkedlabel }}</div>
                     <el-form-item v-for="k in a.option" :label="k.optionTitle">
-                        <el-input v-model="k.optionValue" placeholder="请输入数字" clearable />
+                        <!-- 化石燃料燃烧排放 -->
+                        <el-input v-model="k.optionValue" placeholder="请输入数字" clearable /> 
                     </el-form-item>
                     <br>
                     <p style="float: left;margin-right: 10px;color: #79BBFF;">CO₂排放量为</p>
@@ -100,6 +107,9 @@
     position: fixed;
     bottom: 2%;
 }
+.getMore {
+    float: right;
+}
 </style>
 
 <script setup lang="ts">
@@ -108,6 +118,7 @@ import historyJump from '@/hooks/useJumproute';
 import { ElMessage } from 'element-plus';
 import { setFossilFuel, setElectricity, setIndustrialProcessCeramic, setInformation, uploadFile } from '@/apis/accountapi';
 import { nanoid } from 'nanoid'
+import KnowDefaultButton from '@/components/KnowDefaultButton.vue'
 let fileList: File[] = [];
 const enid = "Ceramics"
 const quota = ref("")
@@ -151,14 +162,6 @@ const getCarbpnemissions = async (is_store: number) => {
     if (is_store == 1) {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
-        }
-        if(urlList.length != 2){
-            ElMessage({
-                showClose: true,
-                message: '证明文件不足',
-                type: 'warning',
-            })
-            return
         }
         await setInformation({
             linked_id: oneid,
@@ -1184,8 +1187,6 @@ const allkey = reactive([
         CO2value: 0,
     }
 ])
-
-
 </script>
 
 @/apis/accountapi

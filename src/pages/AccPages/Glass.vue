@@ -1,6 +1,6 @@
 <template>
     <h1 style="text-align: center;color: #79BBFF;">平板玻璃企业</h1>
-    <div class="contentdiv" v-for="key in allkey">
+    <div class="contentdiv" v-for="(key,index) in allkey">
         <el-card style="margin-bottom: 40px;">
             <div class="title">{{ key.title }}</div>
             <el-button style="margin-bottom: 20px;" @click="key.dialogVisible = true" v-show="key.show1">{{
@@ -9,6 +9,8 @@
             <el-button v-show="key.show3" style="margin-bottom: 20px;" @click="key.dialogVisible = true">{{
         key.checkedtitle
     }}</el-button>
+    <!-- 查看默认值 -->
+        <know-default-button v-if="!index"></know-default-button>
             <el-form v-show="key.show3">
                 <el-form-item :label="key.consumtitle">
                     <el-input v-model="key.consumvalue" placeholder="请输入数字" clearable />
@@ -111,6 +113,7 @@ import { setFossilFuel, setIndustrialProcess, setElectricityAndHeat, uploadFile,
 import historyJump from '@/hooks/useJumproute';
 import { ElMessage } from 'element-plus';
 import { nanoid } from 'nanoid'
+import KnowDefaultButton from '@/components/KnowDefaultButton.vue'
 let fileList: File[] = [];
 let file = ref();
 const enid = "Glass"
@@ -154,14 +157,6 @@ const getCarbpnemissions = async (is_store: number) => {
     if (is_store == 1) {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
-        }
-        if(urlList.length != 2){
-            ElMessage({
-                showClose: true,
-                message: '证明文件不足',
-                type: 'warning',
-            })
-            return
         }
         await setInformation({
             linked_id: oneid,

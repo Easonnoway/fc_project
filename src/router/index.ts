@@ -20,6 +20,8 @@ import TraLoginCom from '@/pages/TraPages/TraLogin.vue'
 import TrasignupCom from '@/pages/TraPages/Trasignup.vue'
 import WantMarCom from '@/pages/TraPages/WantMar.vue'
 import TraHistoryCom from '@/pages/TraPages/TraHistory.vue'
+import LawCom from '@/pages/TraPages/Law.vue'
+import ManageCom from '@/pages/Manage.vue'
 
 const router = createRouter({
     // history:createWebHistory(),
@@ -34,6 +36,11 @@ const router = createRouter({
             name:'home',
             path:'/',
             component:HomeCom
+        },
+        {
+            name: 'manage',
+            path: '/manage',
+            component: ManageCom
         },
         {
             name:'signup',
@@ -114,6 +121,10 @@ const router = createRouter({
                     path:'trahistory',
                     component:TraHistoryCom
                 },
+                {
+                    path: 'law',
+                    component: LawCom
+                }
             ]
         }
     ]

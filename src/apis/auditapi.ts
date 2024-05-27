@@ -14,3 +14,14 @@ export const passAuditOrNot = (data:{linked_id:string,is_audited:number}) => {
         },
     })
 } 
+
+export const getdatas = (data:{}) => {
+    return $http({
+        method:"GET",
+        data,
+        url:"",
+        headers: {
+            token:getToken()
+        },
+    })
+} 

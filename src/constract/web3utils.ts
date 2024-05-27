@@ -1,11 +1,11 @@
 import Web3 from "web3";
-export let web3 = new Web3(Web3.givenProvider || "https://rpc2.sepolia.org");
-var addressReport = "0x75390129F1eC89cB8C4f28827e7B16d1980FF21e";
+export let web3 = new Web3(Web3.givenProvider || "https://rpc-amoy.polygon.technology/");
+var addressReport = "0x2fC71fF9085f02ff6350b86fb2AF7A22521Ef495";
 import abiReport from "@/constract/abi1.json";
 import abiTrading from "@/constract/abi2.json";
 import { ElMessage } from "element-plus";
 import { setenidTouser } from "@/apis/trading";
-var addressTrading = "0xfDFf3b0fe0697ca7f678d98b9D9f0c630a886859";
+var addressTrading = "0xC199dFa02bDAa0C5915840b7939D853c0A989682";
 export var CarbonReport = new web3.eth.Contract(abiReport, addressReport);
 export var CarbonTrading = new web3.eth.Contract(abiTrading, addressTrading);
 
