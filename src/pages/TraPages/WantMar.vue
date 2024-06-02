@@ -52,8 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getMarket2 } from '@/apis/trading';
-import { createTransaction } from '@/constract/web3utils';
+import { deleteMessage, getMarket2 } from '@/apis/trading';
 import { buyCarbonCredits } from '@/constract/web3utils';
 import { getAddress } from '@/utils/constract';
 import { onMounted, reactive, ref } from 'vue'
@@ -91,23 +90,21 @@ const handleEdit = (index: number, row: TraMessage) => {
     dialogFormVisible.value = true
 }
 
-const uptoChain = () => {
-    buyCarbonCredits(
-        getAddress()!,
-        privatKey_input.value,
-        temprow.address,
-        getAddress()!,
-        temprow.number_of_carbon_coins,
-        temprow.price_of_carbon_coin
-    )
-    createTransaction(
-        getAddress()!,
-        privatKey_input.value,
-        temprow.address,
-        getAddress()!,
-        temprow.number_of_carbon_coins,
-        temprow.price_of_carbon_coin
-    )
+const uptoChain = async () => {
+    try {
+        await buyCarbonCredits(
+            getAddress()!,
+            privatKey_input.value,
+            temprow.address,
+            getAddress()!,
+            temprow.number_of_carbon_coins,
+            temprow.price_of_carbon_coin
+        )
+        await deleteMessage({ keyId: temprow.keyId })
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 
 let tableData: TraMessage[] = reactive([])

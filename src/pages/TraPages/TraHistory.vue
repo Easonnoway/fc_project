@@ -1,6 +1,6 @@
 <template>
     <el-card class="con">
-        <div class="title">历史记录</div>
+        <div class="title">全网溯源记录</div>
         <el-table :data="tableData" stripe height="75vh" style="width: 100%;" size="large" :key="itemKey">
             <el-table-column prop="buyer" label="售出企业" width="180" />
             <el-table-column prop="seller" label="购买企业" width="180" />=
@@ -25,6 +25,7 @@
             </div>
         </template>
     </el-dialog>
+   
 </template>
 
 <script lang="ts" setup>
@@ -41,6 +42,7 @@ let privatKey_input = ref("")
 
 const dialogFormVisible = ref(false)
 
+
 interface TraMessage {
     buyer: string,
     seller: string,
@@ -49,16 +51,29 @@ interface TraMessage {
     dealtime: string
 }
 
+const timestapto = (timestamp:any) => {
+    const date = new Date(Number(timestamp) * 1000); // 将时间戳转换为毫秒并创建 Date 对象
+    const year = date.getFullYear(); // 获取年份
+    const month = date.getMonth() + 1; // 获取月份（注意月份是从 0 开始计数，所以需要加 1）
+    const day = date.getDate(); // 获取日期
+    const hours = date.getHours(); // 获取小时
+    const minutes = date.getMinutes(); // 获取分钟
+    const seconds = date.getSeconds(); // 获取秒钟
+    const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return formattedTime
+}
+
 const getData = async () => {
     let alldata = await getTransactionsByAccount(privatKey_input.value, getAddress()!)
     if (Array.isArray(alldata) == true) {
         alldata.forEach(ele => {
+            console.log(typeof(ele[3]))
             let obj = {
-                buyer: ele[0],
+                buyer: ele[2],
                 seller: ele[1],
-                price: ele[2],
-                amount: ele[3],
-                dealtime: '123',
+                price: 0,
+                amount: ele[0],
+                dealtime: timestapto(ele[3]),
             }
             tableData.push(obj)
         })

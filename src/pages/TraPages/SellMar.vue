@@ -53,7 +53,6 @@
 
 <script lang="ts" setup>
 import { deleteMessage, getMarket1 } from '@/apis/trading';
-import { createTransaction } from '@/constract/web3utils';
 import { buyCarbonCredits } from '@/constract/web3utils';
 import { getAddress } from '@/utils/constract';
 import { ElMessage } from 'element-plus';
@@ -102,15 +101,7 @@ const uptoChain = async () => {
             temprow.number_of_carbon_coins,
             temprow.price_of_carbon_coin
         )
-        await createTransaction(
-            getAddress()!,
-            privatKey_input.value,
-            getAddress()!,
-            temprow.address,
-            temprow.number_of_carbon_coins,
-            temprow.price_of_carbon_coin
-        )
-           await deleteMessage({keyId:temprow.keyId})
+        await deleteMessage({ keyId: temprow.keyId })
     } catch (error) {
         console.error(error)
     }

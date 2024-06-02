@@ -2,6 +2,7 @@
     <div class="bgc" style="z-index: -1;">
         <bgc />
     </div>
+    <el-button @click="gohistory()" type="primary" class="gotohistorybutton">返回记录</el-button>
     <el-card shadow="always" style="margin:80px 5%">
         <h2>二氧化碳总排放量：{{ myArray.reduce((accumulator, obj) => accumulator + obj.value, 0) }}吨</h2>
         <div id="CO2Value"> </div>
@@ -113,6 +114,10 @@ import { useRouter, useRoute } from 'vue-router'
 const activeNames = ref(['1'])
 const handleChange = (val: string[]) => {
 
+}
+
+const gohistory = () => {
+    router.push('/accounting/history')
 }
 
 const router = useRouter();
@@ -887,5 +892,10 @@ function init() {
     position: fixed;
     bottom: 2%;
     right: 2%
+}
+.gotohistorybutton{
+    position: fixed;
+    bottom :2% ;
+    right: 10%;
 }
 </style>

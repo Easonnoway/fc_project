@@ -145,6 +145,22 @@ const getCarbpnemissions = async (is_store: number) => {
         if (quota.value !== '') {
             await Promise.all(fileList.map(item => submitUpload(item)));
         }
+        if(quota.value == ''){
+            ElMessage({
+                showClose: true,
+                message: '碳额度未填写',
+                type: 'warning',
+            })
+            return
+        }
+        if(urlList.length != 2){
+            ElMessage({
+                showClose: true,
+                message: '证明文件不足',
+                type: 'warning',
+            })
+            return
+        }
         await setInformation({
             linked_id: oneid,
             annual_ce_quota: parseFloat(quota.value),

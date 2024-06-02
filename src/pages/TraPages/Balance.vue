@@ -6,7 +6,7 @@
                     <el-icon :style="iconStyle">
                         <user />
                     </el-icon>
-                    用户名
+                    用户地址
                 </div>
             </template>
             {{ formData.username }}
@@ -20,7 +20,7 @@
                     企业
                 </div>
             </template>
-            {{ formData.enid }}
+            {{ formData.username=="0x0000000000000000000000000000000000000000"?"用户未上传碳报告":formData.enid }}
         </el-descriptions-item>
         <el-descriptions-item>
             <template #label>
@@ -31,7 +31,7 @@
                     账户状态
                 </div>
             </template>
-            <el-tag size="small">正常</el-tag>
+            <el-tag size="small">{{ formData.username=="0x0000000000000000000000000000000000000000"?"用户未上传碳报告":"正常" }}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item>
             <template #label>
@@ -39,7 +39,7 @@
                     <el-icon :style="iconStyle">
                         <office-building />
                     </el-icon>
-                    碳币余额
+                    碳额度
                 </div>
             </template>
             {{ formData.Carbon_Coin }}
@@ -53,7 +53,7 @@
                     稳定币余额
                 </div>
             </template>
-            {{ formData.Stable_Coin }}
+            {{ 0 }}
         </el-descriptions-item>
     </el-descriptions>
 </template>
@@ -86,12 +86,14 @@ let privatKey_input = ref("")
 
 const onLogin = async () => {
     try {
-        const data = await getUser(privatKey_input.value, getAddress()!);
+        const alldata = await getUser(privatKey_input.value, getAddress()!)
+        const data = alldata![0]
+        const balance = alldata![1]
         if (typeof data === 'object' && Array.isArray(data) === false) {
             const typedData = data as { [key: number]: any, __length__: number };
             formData.enid = typedData[0];
             formData.username = typedData[1];
-            formData.Carbon_Coin = typedData[2];
+            formData.Carbon_Coin = balance;
             formData.Stable_Coin = typedData[3];
             dialogFormVisible.value = false
         } else {

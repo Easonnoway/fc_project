@@ -56,6 +56,18 @@
             </div>
         </template>
     </el-dialog>
+    <el-dialog v-model="messageVisible" title="温馨提示" width="500">
+        <p>操作成功，碳报告正在上链，请耐心等待5-10秒，</p>
+        <p>请等待出现碳报告上链成功后关闭此页面</p>
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button @click="messageVisible = false; router.push('/trading')">取消</el-button>
+                <el-button type="primary" @click="messageVisible = false">
+                    确定
+                </el-button>
+            </div>
+        </template>
+    </el-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -67,7 +79,7 @@ import { getUsername } from '@/utils/auth';
 import router from '@/router';
 import { useRecordStore } from '@/store/RecordState';
 import { ElLoading, ElMessage } from 'element-plus';
-import { addCarbonReport, createUser } from '@/constract/web3utils';
+import { createUser } from '@/constract/web3utils';
 import { getTraloginState } from '@/utils/loginstate';
 import { getAddress } from '@/utils/constract';
 import { setenidTouser } from '@/apis/trading';
@@ -75,7 +87,7 @@ import { setenidTouser } from '@/apis/trading';
 let dialogFormVisible = ref(false)
 
 let privatKey_input = ref('')
-
+const messageVisible = ref(false)
 const RecordState = useRecordStore()
 const itemKey = Math.random()
 
@@ -169,19 +181,14 @@ const uploadReporttoChain = async (index: number, row: Record) => {
     }
     let jsonData = JSON.stringify(data)
     try {
-        await addCarbonReport(privatKey_input.value, getAddress()!, jsonData)
-        await createUser(row.enid, getAddress()!, 100, 100, privatKey_input.value, row.enid)
+        messageVisible.value = true
+        await createUser(row.enid, '0x2871096E3B0ff17eA165d920e67CdFEa24C1556A',jsonData, 100, privatKey_input.value, row.enid)
     } catch (error) {
         ElMessage({
             showClose:true,
             type:"error"
         })
     }
-    // console.log(jsonData)
-    // console.log(typeof(jsonData))
-    // console.log(metacoin.methods.getCarbonReportData().call())
-    // console.log(row.enid, getAddress()!, row.carbonCoin, 100, privatKey_input.value)
-    createUser(row.enid, getAddress()!, 100, 100, privatKey_input.value,row.enid)
 }
 
 const handleEdit = async (index: number, row: Record) => {
