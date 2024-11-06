@@ -21,8 +21,6 @@ export const is_matched = (address: string, privatekey: string) => {
   return publicKey === address;
 };
 
-
-
 export const createUser = async (
   enterprise_type: string,
   address: string,
@@ -32,6 +30,7 @@ export const createUser = async (
   enid: string
 ) => {
   //连接钱包
+  console.log(address, privateKey)
   try {
     if (!is_matched(address, privateKey)) {
       ElMessage({

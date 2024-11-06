@@ -101,7 +101,7 @@ const uptoChain = async () => {
             temprow.number_of_carbon_coins,
             temprow.price_of_carbon_coin
         )
-        await deleteMessage({ keyId: temprow.keyId })
+        // await deleteMessage({ keyId: temprow.keyId })
     } catch (error) {
         console.error(error)
     }

@@ -12,29 +12,19 @@
         <el-table-column prop="username" label="用户名" />
         <el-table-column prop="create_time" label="创建时间" />
         <el-table-column prop="update_time" label="更新时间" />
-        <el-table-column prop="identity" label="用户身份" />
+        <el-table-column prop="identitynew" label="用户身份" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button
-              style="margin-left: 11px"
-              type="primary"
-              @click="frozen(scope.row)"
-              v-show="scope.row.status == 0"
-              >冻结</el-button
-            >
-            <el-button
-              type="warning"
-              @click="unfrozen(scope.row)"
-              v-show="scope.row.status == 1"
-              >解冻</el-button
-            >
+            <el-button style="margin-left: 11px" type="primary" @click="frozen(scope.row)"
+              v-show="scope.row.status == 0">冻结</el-button>
+            <el-button type="warning" @click="unfrozen(scope.row)" v-show="scope.row.status == 1">解冻</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-main>
     <el-footer height="5%">
       <span style="font-family: Helvetica">Made by 以太链盟</span>
-      <div class="beian">备案号：<a href="https://beian.miit.gov.cn" style="color: blue;" >备案号 蜀ICP备2024077657号-1</a></div>
+      <!-- <div class="beian">备案号：<a href="https://beian.miit.gov.cn" style="color: blue;" >备案号 蜀ICP备2024077657号-1</a></div> -->
     </el-footer>
   </el-container>
 </template>
@@ -51,6 +41,7 @@ import { ElMessage } from "element-plus";
 let list = reactive([
   {
     id: 6,
+    identitynew :'shenheyuan',
     username: "yuw1",
     password: "**********",
     identity: 2,
@@ -67,6 +58,22 @@ const getList = async () => {
     .then((response) => {
       loading.value = true;
       list = response?.data.data;
+      list.forEach(element => {
+        switch (element.identity) {
+          case 0:
+            element.identitynew = '企业'
+            break;
+          case 1:
+            element.identitynew = '审核员'
+            break;
+          case 2:
+            element.identitynew = '管理员'
+            break;
+
+          default:
+            break;
+        }
+      });
       loading.value = false;
     })
     .catch((error) => {
@@ -96,11 +103,11 @@ const frozen = async (rowData) => {
     });
   }
 };
-const unfrozen = async (rowData) => {
+const unfrozen = async (rowData: any) => {
   console.log(rowData.status);
   await changestatusApi({ id: rowData.id, status: 0 })
     .then((response) => {
-      console.log(response?.data.msg);
+      // console.log(response?.data.msg);
       getList();
       ElMessage({
         message: "解冻成功",
@@ -123,14 +130,17 @@ const unfrozen = async (rowData) => {
   top: 25%;
   filter: blur(3px);
 }
+
 .el-container {
   overflow: scroll;
 }
+
 .el-header {
   position: fixed;
   width: 100%;
   background-color: rgb(236, 245, 255);
 }
+
 .el-main {
   left: 0;
   right: 0;
@@ -145,6 +155,7 @@ const unfrozen = async (rowData) => {
 .el-table__expanded-cell {
   background-color: rgba(255, 255, 255, 0.4) !important;
 }
+
 .el-table th,
 .el-table tr,
 .el-table td {
@@ -159,12 +170,14 @@ const unfrozen = async (rowData) => {
   width: 100%;
   bottom: 0;
 }
+
 .el-footer span {
   font-size: 20px;
   position: relative;
   top: 20%;
 }
-.beian{
+
+.beian {
   text-decoration: none;
   position: absolute;
   font-family: Helvetica;

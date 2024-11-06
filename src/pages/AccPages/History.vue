@@ -182,7 +182,7 @@ const uploadReporttoChain = async (index: number, row: Record) => {
     let jsonData = JSON.stringify(data)
     try {
         messageVisible.value = true
-        await createUser(row.enid, '0x2871096E3B0ff17eA165d920e67CdFEa24C1556A',jsonData, 100, privatKey_input.value, row.enid)
+        await createUser(row.enid, getAddress()! ,jsonData, 100, privatKey_input.value, row.enid)
     } catch (error) {
         ElMessage({
             showClose:true,
