@@ -29,7 +29,7 @@ import { web3 } from '@/constract/web3utils'
 
 onMounted(async () => {
     if(!getTraloginState()){
-        router.push('/trading/tralogin')
+        router.push('/trading/balance')
     }else{
         router.push('/trading/balance')
     }

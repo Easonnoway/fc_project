@@ -10,7 +10,7 @@ export type BkResponse = {
 };
 
 //设置请求路径
-httpInstance.defaults.baseURL = "http://8.137.151.79:8081";
+httpInstance.defaults.baseURL = "http://8.137.105.46:8080";
 
 //设置响应拦截器
 export const $http = async (config: AxiosRequestConfig) => {
