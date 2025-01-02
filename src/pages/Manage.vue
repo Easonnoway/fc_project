@@ -23,7 +23,7 @@
       </el-table>
     </el-main>
     <el-footer height="5%">
-      <span style="font-family: Helvetica">Made by 以太链盟</span>
+      <span style="font-family: Helvetica">Made by 碳链卫士</span>
       <!-- <div class="beian">备案号：<a href="https://beian.miit.gov.cn" style="color: blue;" >备案号 蜀ICP备2024077657号-1</a></div> -->
     </el-footer>
   </el-container>
@@ -81,12 +81,12 @@ const getList = async () => {
     });
 };
 getList();
-const frozen = async (rowData) => {
+const frozen = async (rowData: any) => {
   console.log(rowData.status);
   if (rowData.identity != 2) {
     await changestatusApi({ id: rowData.id, status: 1 })
       .then((response) => {
-        console.log(response?.data.msg);
+        // console.log(response?.data.msg);
         getList();
         ElMessage({
           message: "冻结成功",

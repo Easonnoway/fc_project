@@ -44,7 +44,7 @@ const login = () => {
     isShow.value = true
 }
 //用户通过了验证
-const success = (msg) => {
+const success = (msg: string) => {
     isShow.value = false
     submitForm(ruleFormRef.value)
 }

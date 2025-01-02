@@ -10,7 +10,7 @@
       <HomCon />
     </el-main>
     <el-footer height="5%">
-      <span style="font-family: Helvetica">Made by 以太链盟</span>
+      <span style="font-family: Helvetica">Made by 碳链卫士</span>
       <!-- 备案号，网站上传需要备案 -->
       <!-- <div class="beian">备案号：<a href="https://beian.miit.gov.cn" style="color: blue;" >备案号 蜀ICP备2024077657号-1</a></div> -->
     </el-footer>
